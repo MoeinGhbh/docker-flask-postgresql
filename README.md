@@ -52,3 +52,10 @@ docker run -p 5001:5000 \
 
 chmod +x services/web/entrypoint.prod.sh
 
+add nginx:
+
+$ docker-compose -f docker-compose.yml down -v
+$ docker-compose -f docker-compose.yml up -d --build
+$ docker-compose -f docker-compose.yml exec web python manage.py create_db
+
+http://localhost:1337
