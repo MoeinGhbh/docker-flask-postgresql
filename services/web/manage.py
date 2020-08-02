@@ -3,7 +3,7 @@ to configure the Flask CLI tool to run and manage the app from the command line
 '''
 from flask.cli import FlaskGroup
 
-from project import app
+from project import app, db
 
 
 # we created a new FlaskGroup instance to extend 
