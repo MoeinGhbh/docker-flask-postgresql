@@ -30,5 +30,8 @@ hello_flask_dev=# \dt
 
 hello_flask_dev=# \q
 
+
+chmod +x services/web/entrypoint.sh
+
 sudo docker volume ls
 sudo docker inspect docker-flask-nginx-postgresql_postgres_data
