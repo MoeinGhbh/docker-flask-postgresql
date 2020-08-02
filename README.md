@@ -31,7 +31,24 @@ hello_flask_dev=# \dt
 hello_flask_dev=# \q
 
 
+add an entrypoint.sh file to the "web" directory to verify that Postgres is up and healthy before creating the database table and running the Flask development server:
+
 chmod +x services/web/entrypoint.sh
+
+
 
 sudo docker volume ls
 sudo docker inspect docker-flask-nginx-postgresql_postgres_data
+
+docker-compose exec web python manage.py seed_db
+
+Despite adding Postgres, we can still create an independent Docker image for Flask by not setting the DATABASE_URL environment variable. To test, build a new image and then run a new container:
+
+docker build -f ./services/web/Dockerfile -t hello_flask:latest ./services/web
+docker run -p 5001:5000 \
+    -e "FLASK_APP=project/__init__.py" -e "FLASK_ENV=development" \
+    hello_flask python /usr/src/app/manage.py run -h 0.0.0.0
+
+
+chmod +x services/web/entrypoint.prod.sh
+
